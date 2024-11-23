@@ -1,13 +1,14 @@
 import asyncio
-
-import aiohttp
 import base64
 from typing import Any
+
+import aiohttp
+
 from app.config import settings
 
 
 class GitHubService:
-    def __init__(self):
+    def __init__(self) -> None:
         self.base_url = settings.gh.GITHUB_API_URL
         self.headers = {}
         if settings.gh.GITHUB_API_KEY:
@@ -20,14 +21,18 @@ class GitHubService:
             data = await response.json()
             return data.get('default_branch', 'master')
 
-    async def get_repo_tree(self, session: aiohttp.ClientSession, repo_full_name: str, branch: str) -> list[dict[str, Any]]:
+    async def get_repo_tree(
+        self, session: aiohttp.ClientSession, repo_full_name: str, branch: str
+    ) -> list[dict[str, Any]]:
         tree_url = f'{self.base_url}/repos/{repo_full_name}/git/trees/{branch}?recursive=1'
         async with session.get(tree_url) as response:
             response.raise_for_status()
             data = await response.json()
             return data.get('tree', [])
 
-    async def get_file_content(self, session: aiohttp.ClientSession, repo_full_name: str, path: str) -> str | None:
+    async def get_file_content(
+        self, session: aiohttp.ClientSession, repo_full_name: str, path: str
+    ) -> str | None:
         content_url = f'{self.base_url}/repos/{repo_full_name}/contents/{path}'
         async with session.get(content_url) as response:
             response.raise_for_status()

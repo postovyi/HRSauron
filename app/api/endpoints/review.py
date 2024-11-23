@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.schemas.ai import ReviewOutputSchema, ReviewInputSchema
+from app.schemas.ai import ReviewInputSchema, ReviewOutputSchema
 from app.services.ai import ai_review
 
 router = APIRouter(prefix='/code-review', tags=['Review'])
