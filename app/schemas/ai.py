@@ -14,3 +14,4 @@ class ReviewOutputSchema(BaseModel):
     mark: int = Field(..., ge=0, le=5)
     review: str
     conclusion: str
+    scanned_files: list[str]
