@@ -56,3 +56,6 @@ class GitHubService:
                     files[path] = content
 
             return files
+
+
+gh_service = GitHubService()
