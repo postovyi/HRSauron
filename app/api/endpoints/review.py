@@ -1,3 +1,11 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix='/review', tags=['Review'])
+from app.schemas.ai import ReviewOutputSchema, ReviewInputSchema
+from app.services.ai import ai_review
+
+router = APIRouter(prefix='/code-review', tags=['Review'])
+
+
+@router.post('/review', response_model=ReviewOutputSchema)
+async def review(data: ReviewInputSchema) -> ReviewOutputSchema:
+    return await ai_review.review(data)
