@@ -1,4 +1,4 @@
-## HRSupervisor ##
+## HRSauron ##
 Simple AI-based app to automatically review code in GitHub repo.
 
 ### How to launch ###
